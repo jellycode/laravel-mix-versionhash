@@ -11,7 +11,8 @@ class VersionHash {
         this.options = Object.assign(
             {
                 length: 6,
-                delimiter: DD
+                delimiter: DD,
+                exclude: []
             },
             options
         )
@@ -52,9 +53,9 @@ class VersionHash {
         let chunkhash = `[name]${delimiter}[chunkhash:${length}].js`
 
         webpackConfig.output.filename = chunkhash
-        
+
         if (webpackConfig.output.chunkFilename) {
-          // merge chunkFilename paths
+            // merge chunkFilename paths
             let directory = path.dirname(webpackConfig.output.chunkFilename)
             webpackConfig.output.chunkFilename = `${directory}/${chunkhash}`
         } else {
@@ -79,6 +80,10 @@ class VersionHash {
 
     getDelimiter() {
         return this.options.delimiter.replace(/[^\.|\-|_]/g, '') || DD
+    }
+
+    exclude(key) {
+        return this.options.exclude.includes(key)
     }
 }
 
