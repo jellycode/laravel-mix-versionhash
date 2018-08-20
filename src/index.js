@@ -41,10 +41,6 @@ class VersionHash {
         })
     }
 
-    dependencies() {
-        return ['jsonfile', 'escape-string-regexp', 'path']
-    }
-
     webpackConfig(webpackConfig) {
         const length = this.options.length
         const delimiter = this.getDelimiter()
